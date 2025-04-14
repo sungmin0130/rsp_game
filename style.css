@@ -155,8 +155,8 @@ button img.icon {
 
 .warning-box {
   position: fixed;
-  top: 150px;
-  right: 100px;
+  top: 200px;
+  right: 80px;
   width: 550px; /* 박스 너비를 크게 조정 */
   background-color: rgba(255, 255, 255, 0.9);
   padding: 20px; /* 패딩을 더 추가하여 내부 여백을 늘림 */
@@ -186,8 +186,8 @@ button img.icon {
 
 .club-box {
   position: fixed;
-  top: 150px;
-  left: 100px; /* 오른쪽에서 왼쪽으로 변경 */
+  top: 200px;
+  left: 80px; 
   width: 550px;
   background: linear-gradient(to right, #ffe0b2, #ffcc80);
   padding: 20px;
@@ -239,3 +239,184 @@ button img.icon {
      0 0 15px #ff9900,
      0 0 20px #ff6600;
 }
+.casino-text {
+  font-size: 60px;
+  font-weight: 950;
+  color: #FFD700;
+  text-shadow:
+    -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000,
+    0 0 10px gold, 0 0 20px orange;
+}
+
+#coin-display {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffd700;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  border: 2px solid gold;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gold;
+  z-index: 1000;
+}
+
+#add-coin-container {
+  position: absolute;
+  top: 110px;
+  right: 40px;
+  display: flex;
+  gap: 20px;
+  z-index: 1000;
+}
+
+#coinInput {
+  width: 100px;
+  height: 60px;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 2px solid gold;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 0 5px gold inset;
+  outline: none;
+}
+
+#coinInput::placeholder {
+  color: #ddd;
+  font-style: italic;
+}
+
+
+button {
+  margin: 10px;
+  padding: 14px 28px;
+  font-size: 20px;
+  background: linear-gradient(to bottom, #c00, #600);
+  color: white;
+  border: 3px solid gold;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 10px gold;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background: linear-gradient(to bottom, #f00, #800);
+}
+
+.result-box {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 20px 30px;
+  border: 3px solid gold;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 0 0 5px red;
+  box-shadow: 0 0 20px gold;
+}
+
+/* 기존 스타일은 그대로 유지 */
+
+/* === 반응형 디자인 추가 === */
+
+/* 모바일 (최대 767px) */
+@media screen and (max-width: 767px) {
+  .casino-text {
+    font-size: 36px;
+  }
+
+  #coin-display {
+    font-size: 18px;
+    padding: 6px 10px;
+    top: 10px;
+    right: 10px;
+  }
+
+  #add-coin-container {
+    top: 60px;
+    right: 10px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+  }
+
+  #coinInput {
+    width: 80px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+
+  .warning-box, .club-box {
+    width: 90%;
+    left: 5% !important;
+    right: auto !important;
+    top: auto;
+    bottom: 20px;
+    position: static;
+    margin: 20px auto;
+  }
+
+  .roulette-container {
+    transform: scale(0.85);
+  }
+}
+
+/* 아이패드 (768px ~ 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .casino-text {
+    font-size: 48px;
+  }
+
+  #coin-display {
+    font-size: 24px;
+    padding: 6px 14px;
+    top: 20px;
+    right: 20px;
+  }
+
+  #add-coin-container {
+    top: 80px;
+    right: 20px;
+    gap: 12px;
+  }
+
+  #coinInput {
+    width: 90px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  button {
+    font-size: 20px;
+    padding: 12px 24px;
+  }
+
+  .warning-box, .club-box {
+    width: 85%;
+    left: 7.5% !important;
+    right: auto !important;
+    top: auto;
+    position: static;
+    margin: 30px auto;
+  }
+
+  .roulette-container {
+    transform: scale(0.95);
+  }
+}
+
+/* 데스크탑 (기본값은 기존 스타일 유지) */

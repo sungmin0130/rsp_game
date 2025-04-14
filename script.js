@@ -7,7 +7,22 @@ const wheel = document.getElementById('wheel');
 let gameStarted = false;
 let intervalId;
 let computerChoice = '';
+let coinCount = 0;
 const imageMap = { rock: 'rock.png', scissors: 'scissors.png', paper: 'paper.png' };
+
+function updateCoinDisplay() {
+  document.getElementById('coinCount').textContent = coinCount;
+}
+
+function addCoins() {
+  const input = document.getElementById('coinInput');
+  const added = parseInt(input.value);
+  if (!isNaN(added) && added > 0) {
+    coinCount += added;
+    updateCoinDisplay();
+    input.value = '';
+  }
+}
 
 function createWheel() {
   wheel.innerHTML = '';
@@ -36,7 +51,6 @@ function createWheel() {
     path.setAttribute('stroke-width', '2');
     wheel.appendChild(path);
 
-    // 텍스트 위치 및 회전
     const textAngle = (startAngle + endAngle) / 2 - 90;
     const textRadius = radius * 0.75;
     const textX = center + textRadius * Math.cos(textAngle * Math.PI / 180);
@@ -54,14 +68,13 @@ function createWheel() {
   }
 
   const borderCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-borderCircle.setAttribute("cx", center);
-borderCircle.setAttribute("cy", center);
-borderCircle.setAttribute("r", radius);
-borderCircle.setAttribute("stroke", "gold");
-borderCircle.setAttribute("stroke-width", "15");
-borderCircle.setAttribute("fill", "none");
-wheel.appendChild(borderCircle); // 가장 위에 노란 원이 오도록 마지막에 추가
-
+  borderCircle.setAttribute("cx", center);
+  borderCircle.setAttribute("cy", center);
+  borderCircle.setAttribute("r", radius);
+  borderCircle.setAttribute("stroke", "gold");
+  borderCircle.setAttribute("stroke-width", "15");
+  borderCircle.setAttribute("fill", "none");
+  wheel.appendChild(borderCircle);
 }
 
 function getRandomReward() {
@@ -77,15 +90,16 @@ function getRandomReward() {
   }
 }
 
-function changeComputerImage() {
-  const choices = ['rock', 'scissors', 'paper'];
-  const randomChoice = choices[Math.floor(Math.random() * 3)];
-  computerChoice = randomChoice;
-  document.getElementById('computer').src = imageMap[randomChoice];
-}
-
 document.getElementById('startBtn').addEventListener('click', () => {
   if (gameStarted) return;
+  if (coinCount <= 0) {
+    alert("게임을 시작하려면 코인이 필요합니다.");
+    return;
+  }
+
+  coinCount -= 1;
+  updateCoinDisplay();
+
   gameStarted = true;
   intervalId = setInterval(changeComputerImage, 30);
   document.getElementById('startBtn').disabled = true;
@@ -94,37 +108,32 @@ document.getElementById('startBtn').addEventListener('click', () => {
   document.getElementById('rouletteContainer').style.display = 'none';
 });
 
-
-function resetGameAfterDelay() {
-  setTimeout(() => {
-    const resultBox = document.getElementById('result');
-    resultBox.style.display = 'none';  // 결과 박스 숨기기
-  }, 3000);
+function changeComputerImage() {
+  const choices = ['rock', 'scissors', 'paper'];
+  const randomChoice = choices[Math.floor(Math.random() * 3)];
+  computerChoice = randomChoice;
+  document.getElementById('computer').src = imageMap[randomChoice];
 }
 
 function userPlay(userChoice) {
   if (!gameStarted) return;
   clearInterval(intervalId);
-  document.getElementById('finalReward').textContent = '';
-  document.getElementById('rouletteContainer').style.display = 'none';
 
   const resultBox = document.getElementById('result');
   resultBox.style.display = 'block';
 
   if (userChoice === computerChoice) {
     resultBox.textContent = "무승부!";
-    resetGameAfterDelay();
   } else if (
     (userChoice === 'rock' && computerChoice === 'scissors') ||
     (userChoice === 'scissors' && computerChoice === 'paper') ||
     (userChoice === 'paper' && computerChoice === 'rock')
   ) {
     resultBox.textContent = "이겼습니다!";
-    document.getElementById('winSound').play();
-    setTimeout(startWheelSpin, 1000);  // 1초 뒤에 startWheelSpin 함수 실행
+    document.getElementById('winSound')?.play();
+    setTimeout(startWheelSpin, 1000);
   } else {
     resultBox.textContent = "졌습니다!";
-    resetGameAfterDelay();
   }
 
   gameStarted = false;
@@ -137,47 +146,23 @@ function startWheelSpin() {
   const index = rewards.indexOf(selected);
   const angle = 360 * 5 + (360 / rewards.length) * (rewards.length - index) - 22.5;
 
-  // 1초 후에 돌림판 보이게 하기
   document.getElementById('rouletteContainer').style.display = 'block';
-
-  wheel.style.transition = 'none';  // 회전 애니메이션 초기화
-  wheel.style.transform = 'rotate(0deg)';  // 회전 초기화
+  wheel.style.transition = 'none';
+  wheel.style.transform = 'rotate(0deg)';
 
   const spinAudio = document.getElementById('spinSound');
-spinAudio.currentTime = 0; // 매번 처음부터 재생
-spinAudio.play();
+  spinAudio.currentTime = 0;
+  spinAudio.play();
 
   setTimeout(() => {
     wheel.style.transition = 'transform 4s cubic-bezier(0.33, 1, 0.68, 1)';
-    wheel.style.transform = `rotate(${angle}deg)`;  // 돌림판 회전
+    wheel.style.transform = `rotate(${angle}deg)`;
   }, 50);
 
   setTimeout(() => {
     rewardDisplay.textContent = `보상: ${selected} coins`;
-    RewardSound.play();  // 보상 글씨가 나올 때 효과음 재생
-  }, 4100);  // 보상 글씨가 4초 후에 나올 때 효과음 실행
-}
-
-function playRewardSound() {
-  // 오디오가 로드되었는지 확인하고 재생
-  if (rewardAudio.readyState >= 3) {
-    rewardAudio.currentTime = 0;  // 처음부터 시작
-    rewardAudio.volume = 1;  // 볼륨을 50%로 설정 (0 ~ 1 사이)
-    rewardAudio.play();
-  } else {
-    rewardAudio.addEventListener('canplaythrough', () => {
-      rewardAudio.currentTime = 0;
-      rewardAudio.volume = 0.5;
-      rewardAudio.play();
-    });
-  }
-}
-
-function resetGameAfterDelay() {
-  setTimeout(() => {
-    const resultBox = document.getElementById('result');
-    resultBox.style.display = 'none';  // 결과 박스 숨기기
-  }, 3000);
+    document.getElementById('RewardSound')?.play();
+  }, 4100);
 }
 
 createWheel();
