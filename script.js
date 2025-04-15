@@ -162,7 +162,30 @@ function startWheelSpin() {
   setTimeout(() => {
     rewardDisplay.textContent = `보상: ${selected} coins`;
     document.getElementById('RewardSound')?.play();
+  
+    const numericReward = parseInt(selected.replace('X', ''));
+    if (!isNaN(numericReward)) {
+      coinCount += numericReward;
+      updateCoinDisplay();
+    }
   }, 4100);
+  
 }
+
+function resetCoins() {
+  const current = coinCount;
+  const totalValue = current * 100;
+
+  const confirmReset = confirm(`현재 코인은 ${current}개입니다.\n총 ${totalValue.toLocaleString()}원입니다.\n정말로 출금하시겠습니까?`);
+
+  if (confirmReset) {
+    coinCount = 0;
+    updateCoinDisplay();
+    alert(`출금이 완료 되었습니다. (기존 ${current}개 = ${totalValue.toLocaleString()}원)`);
+  }
+}
+
+
+
 
 createWheel();

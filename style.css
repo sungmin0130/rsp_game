@@ -155,7 +155,7 @@ button img.icon {
 
 .warning-box {
   position: fixed;
-  top: 200px;
+  top: 230px;
   right: 80px;
   width: 550px; /* 박스 너비를 크게 조정 */
   background-color: rgba(255, 255, 255, 0.9);
@@ -186,7 +186,7 @@ button img.icon {
 
 .club-box {
   position: fixed;
-  top: 200px;
+  top: 230px;
   left: 80px; 
   width: 550px;
   background: linear-gradient(to right, #ffe0b2, #ffcc80);
@@ -253,7 +253,7 @@ button img.icon {
   position: absolute;
   top: 40px;
   right: 50px;
-  font-size: 30px;
+  font-size: 35px;
   font-weight: bold;
   color: #ffd700;
   background-color: rgba(0, 0, 0, 0.6);
@@ -266,7 +266,7 @@ button img.icon {
 
 #add-coin-container {
   position: absolute;
-  top: 110px;
+  top: 120px;
   right: 40px;
   display: flex;
   gap: 20px;
@@ -274,8 +274,9 @@ button img.icon {
 }
 
 #coinInput {
+  top:120px;
   width: 100px;
-  height: 60px;
+  height: 70px;
   padding: 5px 10px;
   font-size: 14px;
   border: 2px solid gold;
@@ -294,7 +295,7 @@ button img.icon {
 
 
 button {
-  margin: 10px;
+  margin: 12px;
   padding: 14px 28px;
   font-size: 20px;
   background: linear-gradient(to bottom, #c00, #600);
@@ -323,100 +324,3 @@ button:hover {
   text-shadow: 0 0 5px red;
   box-shadow: 0 0 20px gold;
 }
-
-/* 기존 스타일은 그대로 유지 */
-
-/* === 반응형 디자인 추가 === */
-
-/* 모바일 (최대 767px) */
-@media screen and (max-width: 767px) {
-  .casino-text {
-    font-size: 36px;
-  }
-
-  #coin-display {
-    font-size: 18px;
-    padding: 6px 10px;
-    top: 10px;
-    right: 10px;
-  }
-
-  #add-coin-container {
-    top: 60px;
-    right: 10px;
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-end;
-  }
-
-  #coinInput {
-    width: 80px;
-    height: 32px;
-    font-size: 14px;
-  }
-
-  button {
-    font-size: 18px;
-    padding: 10px 20px;
-  }
-
-  .warning-box, .club-box {
-    width: 90%;
-    left: 5% !important;
-    right: auto !important;
-    top: auto;
-    bottom: 20px;
-    position: static;
-    margin: 20px auto;
-  }
-
-  .roulette-container {
-    transform: scale(0.85);
-  }
-}
-
-/* 아이패드 (768px ~ 1024px) */
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .casino-text {
-    font-size: 48px;
-  }
-
-  #coin-display {
-    font-size: 24px;
-    padding: 6px 14px;
-    top: 20px;
-    right: 20px;
-  }
-
-  #add-coin-container {
-    top: 80px;
-    right: 20px;
-    gap: 12px;
-  }
-
-  #coinInput {
-    width: 90px;
-    height: 36px;
-    font-size: 16px;
-  }
-
-  button {
-    font-size: 20px;
-    padding: 12px 24px;
-  }
-
-  .warning-box, .club-box {
-    width: 85%;
-    left: 7.5% !important;
-    right: auto !important;
-    top: auto;
-    position: static;
-    margin: 30px auto;
-  }
-
-  .roulette-container {
-    transform: scale(0.95);
-  }
-}
-
-/* 데스크탑 (기본값은 기존 스타일 유지) */
