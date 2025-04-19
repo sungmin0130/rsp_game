@@ -1,5 +1,5 @@
-const rewards = ['X1', 'X2', 'X4', 'X8', 'X10', 'X15', 'X20', 'X100'];
-const weights = [69, 15, 10, 4, 1.49, 0.5, 0.01, 0];
+const rewards = ['X8', 'X4', 'X15', 'X2', 'X10', 'X20', 'X1', 'X100'];
+const weights = [6, 11, 3, 18, 3, 2, 49, 0.1];
 const colors = ['#ff3333', '#ff9933', '#ffff33', '#66ff66', '#33ffff', '#3399ff', '#cc66ff', '#ff66cc'];
 const center = 150;
 const radius = 140;
@@ -142,10 +142,24 @@ function userPlay(userChoice) {
 
 function startWheelSpin() {
   const rewardDisplay = document.getElementById('finalReward');
-  const selected = getRandomReward();
-  const index = rewards.indexOf(selected);
-  const angle = 360 * 5 + (360 / rewards.length) * (rewards.length - index) - 22.5;
+  const selected = getRandomReward();                    // 예: 'X4'
+  const index = rewards.indexOf(selected);               // 예: 2
+  const degPer = 360 / rewards.length;                   // 한 구역의 각도 (예: 45도)
 
+  // 🟡 보상 구역 시작각도
+  const startDeg = index * degPer;
+
+  // ✅ 구역 내에서 랜덤한 위치 (0 ~ degPer 사이)
+  const randomOffsetInSegment = Math.random() * degPer;
+
+  // 📌 포인터가 가리켜야 할 각도 (시계방향 회전)
+  const stopDeg = startDeg + randomOffsetInSegment;
+
+  // 회전 각도 = 여러 바퀴 + (360 - stopDeg)
+  const extraSpins = 5;
+  const targetAngle = 360 * extraSpins + (360 - stopDeg);
+
+  // 돌림판 초기화
   document.getElementById('rouletteContainer').style.display = 'block';
   wheel.style.transition = 'none';
   wheel.style.transform = 'rotate(0deg)';
@@ -154,23 +168,25 @@ function startWheelSpin() {
   spinAudio.currentTime = 0;
   spinAudio.play();
 
+  // 실제 회전
   setTimeout(() => {
     wheel.style.transition = 'transform 4s cubic-bezier(0.33, 1, 0.68, 1)';
-    wheel.style.transform = `rotate(${angle}deg)`;
+    wheel.style.transform = `rotate(${targetAngle}deg)`;
   }, 50);
 
+  // 결과 출력 및 코인 지급
   setTimeout(() => {
     rewardDisplay.textContent = `보상: ${selected} coins`;
     document.getElementById('RewardSound')?.play();
-  
-    const numericReward = parseInt(selected.replace('X', ''));
+
+    const numericReward = parseInt(selected.replace('X', ''), 10);
     if (!isNaN(numericReward)) {
       coinCount += numericReward;
       updateCoinDisplay();
     }
   }, 4100);
-  
 }
+
 
 function resetCoins() {
   const current = coinCount;
