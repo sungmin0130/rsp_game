@@ -1,5 +1,5 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyApFYjbx82vlSlNh-LYxaSKQ5SEpP11_a4",
+  apiKey: "",
   authDomain: "rsp-game-76111.firebaseapp.com",
   projectId: "rsp-game-76111",
   storageBucket: "rsp-game-76111.firebasestorage.app",
