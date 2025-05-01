@@ -8,9 +8,7 @@
 <body>
   <h1 class="casino-text">가위바위보 게임</h1>
 
-
-
-<div class="game">
+  <div class="game">
     <img id="computer" src="rock.png" width="150" />
     <div class="buttons">
       <button onclick="userPlay('rock')"><img src="rock.png" class="icon" /></button>
@@ -21,33 +19,13 @@
     <p id="result" class="result-box" style="display: none;"></p>
   </div>
 
-  <div class="roulette-container" id="rouletteContainer" style="display: none;">
+  <div class="roulette-wrapper">
     <div class="pointer"></div>
-    <svg id="wheel" viewBox="0 0 300 300" width="300" height="300">     
-    </svg>
+    <div class="roulette-container" id="rouletteContainer" style="display: none;">
+      <svg id="wheel" viewBox="0 0 300 300" width="300" height="300"></svg>
+    </div>
   </div>
 
-  <div id="warning" class="warning-box">
-    <h3>※주의사항※</h3>
-    <ul>
-      <li>이 게임을 하기 위해서는 1coin이 필요합니다.(1coin=100₩)</li>
-      <li>코인 충전은 관리자만 할 수 있습니다.</li>
-      <li>이 게임을 하고 coin을 잃어도 배상하지 않습니다.</li>
-      <li>게임을 그만하고 싶으면 출금 버튼을 눌러주세요.</li>
-    </ul>
-  </div>
-  
-  <div id="club-info" class="club-box">
-    <h3>인공지능 인문학</h3>
-    <ul>
-    <li><strong>인공지능 인문학 동아리</strong>는 누구나 들어오고 싶어하는 동아리입니다.</li>
-      <li>✅ 최고의 선생님</li>
-      <li>✅ 재미있고 유익한 수업</li>
-      <li>✅ 알찬 생기부</li>
-    
-    <li><strong>많은 관심 부탁드립니다!</strong></li>
-  </ul>
-  </div>
 
   <audio id="winSound">
     <source src="win.mp3" type="audio/mp3">
@@ -58,25 +36,49 @@
   <audio id="RewardSound">
     <source src="coins.mp3" type="audio/mp3">
   </audio>
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  
   <p id="finalReward" class="reward-text"></p>
-
 
   <!-- 코인 표시 -->
   <div id="coin-display">
     ♦ 중일고 코인: <span id="coinCount">0</span> coins
   </div>
 
-   <!-- 코인 추가 기능 -->
-   <div id="add-coin-container">
+  <!-- 코인 추가 기능 -->
+  <div id="add-coin-container">
     <input type="number" id="coinInput" min="1" placeholder="추가할 코인 수">
     <button onclick="addCoins()">코인 추가</button>
     <button id="reset-coin-button" onclick="resetCoins()">출금</button>
   </div>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+  <!-- 로그인 입력 -->
+  <div id="login-section">
+    <input type="text" id="studentIdInput" placeholder="(학번 이름)을 입력하세요" />
+    <button onclick="login()">로그인</button>
+  </div>
+
+  <!-- 로그인 후 사용자 정보 표시 -->
+  <div id="user-info" style="display:none;">
+    <span id="studentIdDisplay"></span>님 환영합니다.
+    <button onclick="logout()">로그아웃</button>
+  </div>
+
+  <div id="warning" class="warning-box">
+    <h3>※주의사항※</h3>
+    <ul>
+      <li>게임을 시작하기 전 (학번 이름)으로 로그인을 해주세요.</li>
+      <li>코인을 충전하기 위해서 관리자에게 코인을 지불해 주세요</li>
+      <li>게임 1판당 1coin이 필요합니다.(1coin=100₩)</li>
+      <li>이 게임을 하고 coin을 잃어도 배상하지 않습니다.</li>
+      <li>게임을 그만하고 싶으면 출금 버튼을 눌러주세요.</li>
+    </ul>
+  </div>
 
   <script src="script.js"></script>
 </body>
