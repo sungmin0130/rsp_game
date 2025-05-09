@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="main-wrapper">
   <h1 class="casino-text">가위바위보 게임</h1>
 
   <div class="game">
@@ -25,6 +26,21 @@
       <svg id="wheel" viewBox="0 0 300 300" width="300" height="300"></svg>
     </div>
   </div>
+
+<!-- ✅ 오른쪽 상단 충전 UI -->
+<div id="add-coin-container">
+  <input type="number" id="coinInput" min="1" placeholder="추가할 코인 수">
+  <!-- 코인 추가 버튼 -->
+<button id="addCoinBtn" onclick="showPasswordInput()" disabled>코인 추가</button>
+
+
+  <div id="password-box" style="display: none; margin-top: 10px;">
+    <input type="password" id="coinPassword" placeholder="비밀번호 입력">
+    <button onclick="submitPassword()">확인</button>
+  </div>
+
+  <button id="withdrawBtn" onclick="resetCoins()" disabled>출금</button>
+</div>
 
 
   <audio id="winSound">
@@ -46,13 +62,7 @@
     ♦ 중일고 코인: <span id="coinCount">0</span> coins
   </div>
 
-  <!-- 코인 추가 기능 -->
-  <div id="add-coin-container">
-    <input type="number" id="coinInput" min="1" placeholder="추가할 코인 수">
-    <button onclick="addCoins()">코인 추가</button>
-    <button id="reset-coin-button" onclick="resetCoins()">출금</button>
-  </div>
-
+ 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
@@ -69,6 +79,18 @@
     <button onclick="logout()">로그아웃</button>
   </div>
 
+<div id="game-summary" style="display: none; margin-top: 20px;">
+  <table>
+    <tr><td>총 게임 수:</td><td id="summary-total">0</td></tr>
+    <tr><td>이긴 횟수:</td><td id="summary-win">0</td></tr>
+    <tr><td>무승부 횟수:</td><td id="summary-draw">0</td></tr>
+    <tr><td>진 횟수:</td><td id="summary-loss">0</td></tr>
+    <tr><td>승률:</td><td id="summary-rate">0%</td></tr>
+    <tr><td>총 보상 코인:</td><td id="summary-reward">0</td></tr>
+  </table>
+</div>
+
+  
   <div id="warning" class="warning-box">
     <h3>※주의사항※</h3>
     <ul>
@@ -77,9 +99,10 @@
       <li>게임 1판당 1coin이 필요합니다.(1coin=100₩)</li>
       <li>이 게임을 하고 coin을 잃어도 배상하지 않습니다.</li>
       <li>게임을 그만하고 싶으면 출금 버튼을 눌러주세요.</li>
+      <li>1인당 가능한 코인 충전 개수는 15coin 입니다.</li>
     </ul>
   </div>
-
+</div>
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
 
+#main-wrapper {
+  transform: scale(1.0);
+  transform-origin: top center;
+  width: 100%;              /* 125% → 100%로 */
+  margin: 0 auto;           /* 가운데 정렬 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* 내부 콘텐츠도 중앙 정렬 */
+}
+
+
 body {
   font-family: 'Orbitron', sans-serif;
   background: radial-gradient(circle, #000000, #1a1a1a);
@@ -59,10 +70,14 @@ button img.icon {
 }
 
 .roulette-wrapper {
-  position: relative;
+  position: fixed;         /* 고정 위치로 */
+  top: 520px;              /* 화면 위에서 떨어진 위치 */
+  left: 50%;               /* 화면 가로 가운데 */
+  transform: translateX(-50%);
   width: 300px;
-  margin: 40px auto;
+  z-index: 999;
 }
+
 
 .pointer {
   position: absolute;
@@ -105,19 +120,22 @@ button img.icon {
 }
 
 .result-box {
-  display: inline-block;
-  margin: 20px auto;
-  padding: 18px 28px;
+  position: fixed;
+  top: 420px;          /* 원하는 위치 조절 */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  padding: 16px 24px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #FFD700;
   border: 3px solid gold;
   border-radius: 15px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #FFD700;
-  font-size: 22px;
-  font-weight: bold;
-  text-shadow: 0 0 10px red;
-  box-shadow: 0 0 25px gold;
-  animation: fadeIn 0.6s ease-in-out;
+  box-shadow: 0 0 15px gold;
+  z-index: 999;
 }
+
+
 
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
@@ -127,7 +145,7 @@ button img.icon {
 #coin-display {
   position: fixed;
   top: 30px;
-  right: 40px;
+  right: -20px;
   background-color: #111;
   color: #ffd700;
   padding: 10px 20px;
@@ -179,7 +197,7 @@ button img.icon {
 
 #login-section {
   position: fixed;
-  top: 250px;
+  top: 230px;
   right: 40px;
   display: flex;
   flex-direction: row;
@@ -214,24 +232,24 @@ button img.icon {
 }
 #user-info {
   position: fixed;
-  right: 40px;
-  top: 250px;
+  right: -20px;
+  top: 210px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  font-size: unset;
   font-weight: bold;
   color: gold;
   z-index: 1000;
 }
+
 
 #user-info button {
   background: linear-gradient(to bottom, #ffd700, #ff9800);
   border: 2px solid gold;
   color: rgb(0, 0, 0);
   font-size: 20px;
-  top: 250px;
+  top: 230px;
   padding: 14px 24px;
   border-radius: 10px;
   cursor: pointer;
@@ -244,16 +262,143 @@ button img.icon {
 
 .warning-box {
   position: fixed;
-  top: 350px;
+  top: 300px;
   left: 40px;
   transform: translateY(-50%);
-  width: 420px;
+  width: 380px;
   background-color: rgba(255, 255, 255, 0.95);
   padding: 50px;
-  border-radius: 15px;
+  border-radius: 8px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
   z-index: 1000;
   font-family: Arial, sans-serif;
-  font-size: 24px;
+  font-size: 18px;
   color: #333;
+}
+
+#password-box {
+  display: none;
+  gap: 10px;
+  margin-top: 10px;
+  flex-direction: row;
+}
+
+#coinPassword {
+  width: 150px;
+  height: 36px;
+  font-size: 16px;
+  border: 2px solid gold;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-align: center;
+  box-shadow: 0 0 5px gold inset;
+}
+
+#password-box button {
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid gold;
+  background: linear-gradient(to bottom, #ffd700, #ff9800);
+  color: black;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#game-summary {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 3px solid gold;
+  border-radius: 15px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+}
+
+#game-summary {
+  position: fixed;
+  top: 300px; /* 원하는 세로 위치 (조절 가능) */
+  right: 40px; /* 오른쪽 여백 */
+  width: 220px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 3px solid gold;
+  border-radius: 15px;
+  padding: 18px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  z-index: 1000;
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+}
+
+#game-summary h2 {
+  font-size: 28px;
+  color: #FFD700;
+  text-align: center;
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px #FFCC00, 0 0 10px orange;
+}
+
+#game-summary table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 20px;
+}
+
+#game-summary td {
+  padding: 6px;
+}
+
+#game-summary td:first-child {
+  color: #FFEB3B;
+  font-weight: bold;
+}
+
+#game-summary td:last-child {
+  color: #00E676;
+  text-align: right;
+}
+
+
+#game-summary td:last-child {
+  color: #00E676;
+  text-align: right;
+}
+
+#login-section {
+  right: -20px; /* 기존보다 오른쪽으로 더 밀고 싶으면 숫자를 줄이세요 */
+}
+
+#add-coin-container {
+  right: -20px; /* 더 오른쪽으로 */
+}
+
+#game-summary {
+  right: -20px; /* 통계 박스 더 오른쪽으로 */
+}
+
+.warning-box {
+  left: -20px; /* 기존 40px → 20px */
+}
+
+#finalReward {
+  display: none;
+  margin-top: 110px;
+  padding: 12px 20px;
+  background-color: rgba(0, 0, 0, 1); /* 반투명 배경 */
+  border: 2px solid gold;
+  border-radius: 10px;
+  font-size: 24px;
+  color: #00e676;
+  font-weight: bold;
+  text-shadow: 0 0 10px #00ff6a, 0 0 20px #00e676;
+  box-shadow: 0 0 15px gold;
+  animation: fadeIn 0.5s ease-in-out;
+  z-index: 9999;
 }
