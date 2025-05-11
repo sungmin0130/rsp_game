@@ -1,8 +1,9 @@
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
+  apiKey: "",
   authDomain: "rsp-game-76111.firebaseapp.com",
   projectId: "rsp-game-76111"
 };
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -30,9 +31,9 @@ function updateCoinDisplay() {
 function login() {
   const input = document.getElementById('studentIdInput');
   const id = input.value.trim().replace(/\s+/g, ' ');
-  if (!id) return alert("(학번 이름)을 입력해주세요.");
+  if (!id) return alert("(학번이름)을 입력해주세요.");
    if (id.includes(" ")) {
-    alert("띄어쓰기를 포함할 수 없습니다. '1523노무현' 형태로 입력하세요.");
+    alert("띄어쓰기를 포함할 수 없습니다. '0000홍길동' 형태로 입력하세요.");
     return;
   }
   currentStudentId = id;
@@ -93,7 +94,7 @@ async function submitPassword() {
   if (hash !== PASSWORD_HASH) return alert("비밀번호가 틀렸습니다.");
 
   if (isNaN(added) || added <= 0) {
-    alert("유효한 코인 수를 입력해주세요.");
+    alert("유효한 포인트 수를 입력해주세요.");
     return;
   }
 
@@ -168,10 +169,10 @@ async function loadSavedCoins() {
 async function resetCoins() {
   if (!currentStudentId) return alert("로그인이 필요합니다.");
   const current = coinCount;
-  if (confirm(`현재 코인은 ${current}개입니다. 출금하시겠습니까?`)) {
+  if (confirm(`현재 포인트는 ${current}개입니다. 받으시겠습니까?`)) {
     coinCount = 0;
     updateCoinDisplay();
-    alert(`출금이 완료되었습니다. (기존 ${current}개 → ${current * 100}원)`);
+    alert(`포인트 받기가 완료되었습니다. \n 관리자에게 포인트를 받고 교환을 하러 가주세요.(${current}개)`);
     await updateCoinStats("출금", current);
     await saveCurrentCoins();
   }
@@ -206,7 +207,7 @@ async function updateCoinStats(type, amount) {
 document.getElementById('startBtn').addEventListener('click', () => {
   if (!currentStudentId) return alert("로그인이 필요합니다.");
   if (gameStarted) return;
-  if (coinCount <= 0) return alert("코인이 부족합니다.");
+  if (coinCount <= 0) return alert("포인트가가 부족합니다.");
   coinCount--;
   updateCoinDisplay();
   gameStarted = true;
@@ -401,7 +402,7 @@ function startWheelSpin() {
     wheel.style.transform = `rotate(${targetAngle}deg)`;
   }, 50);
   setTimeout(() => {
-    rewardDisplay.textContent = `보상: ${selected} coins`;
+    rewardDisplay.textContent = `보상: ${selected} point`;
     document.getElementById('RewardSound')?.play();
     const numeric = parseInt(selected.replace('X', ''));
     rewardDisplay.style.display = 'block';

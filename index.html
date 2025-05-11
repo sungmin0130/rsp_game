@@ -31,7 +31,7 @@
 <div id="add-coin-container">
   <input type="number" id="coinInput" min="1" placeholder="추가할 코인 수">
   <!-- 코인 추가 버튼 -->
-<button id="addCoinBtn" onclick="showPasswordInput()" disabled>코인 추가</button>
+<button id="addCoinBtn" onclick="showPasswordInput()" disabled>포인트 추가</button>
 
 
   <div id="password-box" style="display: none; margin-top: 10px;">
@@ -39,7 +39,7 @@
     <button onclick="submitPassword()">확인</button>
   </div>
 
-  <button id="withdrawBtn" onclick="resetCoins()" disabled>출금</button>
+  <button id="withdrawBtn" onclick="resetCoins()" disabled>포인트 받기</button>
 </div>
 
 
@@ -59,7 +59,7 @@
 
   <!-- 코인 표시 -->
   <div id="coin-display">
-    ♦ 중일고 코인: <span id="coinCount">0</span> coins
+    ♦ 체험 포인트: <span id="coinCount">0</span> point
   </div>
 
  
@@ -86,7 +86,7 @@
     <tr><td>무승부 횟수:</td><td id="summary-draw">0</td></tr>
     <tr><td>진 횟수:</td><td id="summary-loss">0</td></tr>
     <tr><td>승률:</td><td id="summary-rate">0%</td></tr>
-    <tr><td>총 보상 코인:</td><td id="summary-reward">0</td></tr>
+    <tr><td>총 보상 포인트트:</td><td id="summary-reward">0</td></tr>
   </table>
 </div>
 
@@ -94,12 +94,14 @@
   <div id="warning" class="warning-box">
     <h3>※주의사항※</h3>
     <ul>
-      <li>게임을 시작하기 전 (학번 이름)으로 로그인을 해주세요.</li>
-      <li>코인을 충전하기 위해서 관리자에게 코인을 지불해 주세요</li>
-      <li>게임 1판당 1coin이 필요합니다.(1coin=100₩)</li>
-      <li>이 게임을 하고 coin을 잃어도 배상하지 않습니다.</li>
-      <li>게임을 그만하고 싶으면 출금 버튼을 눌러주세요.</li>
-      <li>1인당 가능한 코인 충전 개수는 15coin 입니다.</li>
+      <li>게임을 시작하기 전 (학번이름)으로 로그인을 해주세요.</li>
+      <li>타인의 학번이름 도용시 환불 없이 즉시 퇴장입니다.</li>
+      <li>코인을 충전하기 위해서 관리자에게 포인트을 지불해 주세요</li>
+      <li>게임 1판당 1point이 필요합니다.(1point = 100₩)</li>
+      <li>이 게임을 하고 point을 잃어도 배상하지 않습니다.</li>
+      <li>1인당 가능한 포인트 충전 개수는 20point 입니다.</li>
+      <li>게임을 그만하고 싶으면 포인트 받기 버튼을 눌러주세요.</li>
+      <li>포인트를 현금으로 교환할 시 「사행행위 등 규제 및 처벌 특례법」에 의해 처벌될 수 있습니다.</li>
     </ul>
   </div>
 </div>
