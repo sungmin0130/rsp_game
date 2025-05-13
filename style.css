@@ -70,13 +70,16 @@ button img.icon {
 }
 
 .roulette-wrapper {
-  position: fixed;         /* 고정 위치로 */
-  top: 520px;              /* 화면 위에서 떨어진 위치 */
-  left: 50%;               /* 화면 가로 가운데 */
-  transform: translateX(-50%);
-  width: 300px;
+  position: fixed;
+  top: 750px;                     /* 세로 중앙 */
+  left: 50%;                    /* 가로 중앙 */
+  transform: translate(-50%, -50%);  /* 정확히 정중앙 정렬 */
+  width: 400px;                 /* SVG 크기와 동일 */
+  height: 400px;                /* SVG 크기와 동일 */
   z-index: 999;
 }
+
+
 
 
 .pointer {
@@ -389,7 +392,7 @@ button:disabled {
 
 #finalReward {
   display: none;
-  margin-top: 110px;
+  margin-top: 180px;
   padding: 12px 20px;
   background-color: rgba(0, 0, 0, 1); /* 반투명 배경 */
   border: 2px solid gold;

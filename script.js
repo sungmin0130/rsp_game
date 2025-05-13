@@ -9,10 +9,10 @@ const db = firebase.firestore();
 
 const imageMap = { rock: 'rock.png', scissors: 'scissors.png', paper: 'paper.png' };
 const rewards = ['X8', 'X4', 'X15', 'X2', 'X10', 'X20', 'X1', 'X100'];
-const weights = [4, 9, 3, 24, 2, 2, 55, 0.01];
+const weights = [4, 10, 2, 24, 2, 1, 56.999, 0.001];
 const colors = ['#ff3333', '#ff9933', '#ffff33', '#66ff66', '#33ffff', '#3399ff', '#cc66ff', '#ff66cc'];
-const center = 150;
-const radius = 140;
+const center = 200;
+const radius = 190;
 const wheel = document.getElementById('wheel');
 const pointer = document.querySelector('.roulette-wrapper .pointer');
 
@@ -213,8 +213,8 @@ document.getElementById('startBtn').addEventListener('click', () => {
   gameStarted = true;
   intervalId = setInterval(changeComputerImage, 30);
   document.getElementById('startBtn').disabled = true;
-  document.getElementById('result').textContent = '';
-  document.getElementById('finalReward').textContent = '';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('finalReward').style.display = 'none';
   document.getElementById('rouletteContainer').style.display = 'none';
   pointer.style.display = 'none';
   db.collection("gameLogs").add({
@@ -397,6 +397,10 @@ function startWheelSpin() {
   wheel.style.transform = 'rotate(0deg)';
   document.getElementById('spinSound').currentTime = 0;
   document.getElementById('spinSound').play();
+  const spinSound = document.getElementById('spinSound');
+  spinSound.volume = 1.0;
+  spinSound.currentTime = 0;
+  spinSound.play(); 
   setTimeout(() => {
     wheel.style.transition = 'transform 4s cubic-bezier(0.33, 1, 0.68, 1)';
     wheel.style.transform = `rotate(${targetAngle}deg)`;
