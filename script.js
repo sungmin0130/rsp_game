@@ -9,7 +9,7 @@ const db = firebase.firestore();
 
 const imageMap = { rock: 'rock.png', scissors: 'scissors.png', paper: 'paper.png' };
 const rewards = ['X8', 'X4', 'X15', 'X2', 'X10', 'X20', 'X1', 'X100'];
-const weights = [4, 10, 2, 24, 2, 1, 56.999, 0.001];
+const weights = [3, 8, 2, 24, 2, 1, 60.999, 0.001];
 const colors = ['#ff3333', '#ff9933', '#ffff33', '#66ff66', '#33ffff', '#3399ff', '#cc66ff', '#ff66cc'];
 const center = 200;
 const radius = 190;
