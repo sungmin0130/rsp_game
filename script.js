@@ -88,7 +88,7 @@ async function submitPassword() {
   const added = parseInt(input.value);
 
   const hash = await sha256(password);
-  const PASSWORD_HASH = "dc2222c7635846aa16964af1d476074a1db431903d13ea38009c879ef234a534"; //비밀번호 해시
+  const PASSWORD_HASH = "ad5f13f4e413745462e96dfda904f5b7c9d31b3adea4f9836945850d648a6362"; //비밀번호 해시
 
   if (!currentStudentId) return alert("로그인이 필요합니다.");
   if (hash !== PASSWORD_HASH) return alert("비밀번호가 틀렸습니다.");
